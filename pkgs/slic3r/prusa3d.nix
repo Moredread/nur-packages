@@ -114,10 +114,10 @@ stdenv.mkDerivation rec {
   };
 
   meta = with stdenv.lib; {
-    description = "G-code generator for 3D printer";
+    description = "Latest version of a G-code generator for 3D printer";
     homepage = https://github.com/prusa3d/Slic3r;
     license = licenses.agpl3;
     platforms = platforms.linux;
-    maintainers = with maintainers; [ tweber ];
+    maintainers = with maintainers; [ moredread ];
   };
 }
