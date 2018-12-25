@@ -104,7 +104,7 @@ stdenv.mkDerivation rec {
   '' + lib.optionalString (lib.versionOlder "2.5" nloptVersion) ''
     # Since version 2.5.0 of nlopt we need to link to libnlopt, as libnlopt_cxx
     # now seems to be integrated into the main lib.
-    sed -i 's|nlopt_cxx|nlopt|g' xs/src/libnest2d/cmake_modules/FindNLopt.cmake
+    sed -i 's|nlopt_cxx|nlopt|g' src/libnest2d/cmake_modules/FindNLopt.cmake
   '';
 
   postInstall = ''
