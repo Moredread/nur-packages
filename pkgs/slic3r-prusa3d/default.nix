@@ -1,6 +1,6 @@
 { stdenv, lib, fetchFromGitHub, makeWrapper, cmake, pkgconfig
 , boost, curl, expat, glew, libpng, tbb, wxGTK30
-, gtest, nlopt
+, gtest, nlopt, xorg
 }:
 let
   nloptVersion = if lib.hasAttr "version" nlopt
@@ -29,6 +29,7 @@ stdenv.mkDerivation rec {
     libpng
     tbb
     wxGTK30
+    xorg.libX11
   ] ++ checkInputs;
 
   checkInputs = [ gtest ];
