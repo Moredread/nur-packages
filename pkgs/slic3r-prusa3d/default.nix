@@ -36,7 +36,7 @@ let
 in
 stdenv.mkDerivation rec {
   name = "slic3r-prusa-edition-${version}";
-  version = "1.41.2";
+  version = "1.42.0-alpha1";
 
   enableParallelBuilding = true;
 
@@ -47,7 +47,7 @@ stdenv.mkDerivation rec {
 
   buildInputs = [
     curl
-    eigen
+    #eigen
     glew
     pcre
     perl
@@ -93,7 +93,7 @@ stdenv.mkDerivation rec {
     # In nix ioctls.h isn't available from the standard kernel-headers package
     # on other distributions. As the copy in glibc seems to be identical to the
     # one in the kernel, we use that one instead.
-    sed -i 's|"/usr/include/asm-generic/ioctls.h"|<asm-generic/ioctls.h>|g' xs/src/libslic3r/GCodeSender.cpp
+    sed -i 's|"/usr/include/asm-generic/ioctls.h"|<asm-generic/ioctls.h>|g' src/libslic3r/GCodeSender.cpp
 
     # PERL_VENDORARCH and PERL_VENDORLIB aren't set correctly by the build
     # system, so we have to override them. Setting them as environment variables
@@ -108,20 +108,19 @@ stdenv.mkDerivation rec {
   '';
 
   postInstall = ''
-    echo 'postInstall'
-    wrapProgram "$out/bin/slic3r-prusa3d" \
+    mkdir -p $out/bin
+    cp src/slic3r-gui $out/bin
+
+    wrapProgram "$out/bin/slic3r-gui" \
     --prefix PERL5LIB : "$out/lib/slic3r-prusa3d:$PERL5LIB"
 
-    # it seems we need to copy the icons...
-    mkdir -p $out/bin/var
-    cp -r ../resources/icons/* $out/bin/var/
-    cp -r ../resources $out/bin/
+    cp -r ../resources $out
   '';
 
   src = fetchFromGitHub {
     owner = "prusa3d";
     repo = "Slic3r";
-    sha256 = "046ircwc0wr586v7106ys557ypslmyq9p4qgi34ads1d6bgxhlyy";
+    sha256 = "0kcvj3jv2pvq41fawxcf9ppv9xab718826fgghs6qx79mr9vijxd";
     rev = "version_${version}";
   };
 
