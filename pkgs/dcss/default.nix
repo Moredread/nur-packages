@@ -25,7 +25,7 @@ stdenv.mkDerivation rec {
   src = fetchgit {
     url = "git://github.com/crawl/crawl.git";
     rev = version;
-    sha256 = "0cmf3kib3zz318yn3h0m6p79drvjk9wqnkaygl52gra6zzkvl85n";
+    sha256 = "1f8qkm3symph6pscsnmgngvfmicw37vj7zmn6r49scfrd546pd05";
     fetchSubmodules = true;
     leaveDotGit = true;
     deepClone = true;
