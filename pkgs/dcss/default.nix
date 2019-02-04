@@ -1,4 +1,4 @@
-{ stdenv, libpng, gnumake, pkgconfig, fetchFromGitHub, which, fetchgit, perl, git, sqlite, freetype, SDL2, SDL2_image, SDL2_mixer, mesa_noglu, ncurses, zlib, pngcrush, libGLU, enableTiles ? false, enableSound ? enableTiles }:
+{ stdenv, libpng, gnumake, pkgconfig, fetchFromGitHub, which, fetchgit, perl, sqlite, freetype, SDL2, SDL2_image, SDL2_mixer, mesa_noglu, ncurses, zlib, pngcrush, libGLU, enableTiles ? false, enableSound ? enableTiles }:
 
 # TODO: needs some cleaning. Bones file is downloaded during install, so is
 # missing if build in a sandbox. Needs deepClone atm as version string is
@@ -42,7 +42,6 @@ stdenv.mkDerivation rec {
   '';
 
   nativeBuildInputs = [
-    git
     gnumake
     pkgconfig
     which
