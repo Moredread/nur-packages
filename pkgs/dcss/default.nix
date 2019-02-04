@@ -7,7 +7,7 @@
 with stdenv.lib;
 
 stdenv.mkDerivation rec {
-  name = "env";
+  name = "dcss" + optionalString enableTiles "-tiles";
   version = "0.22.1";
 
 #  src = fetchFromGitHub {
