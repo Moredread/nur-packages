@@ -83,6 +83,10 @@ stdenv.mkDerivation rec {
 
   makeFlags = "prefix=$(out)";
 
+  postInstall = optionalString enableTiles ''
+      mv $out/bin/crawl $out/bin/crawl-tiles
+    '';
+
   meta = with stdenv.lib; {
     description = "Dungeon Crawl: Stone Soup, a game of dungeon exploration, combat and magic, involving characters of diverse skills, worshipping deities of great power and caprice" + optionalString enableTiles " (graphical version)";
     homepage = https://crawl.develz.org/;
