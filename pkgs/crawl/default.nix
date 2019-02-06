@@ -58,28 +58,25 @@ stdenv.mkDerivation rec {
     which
   ] ++ optional enableTiles pngcrush;
 
-  # TODO: figure out why some dependencies don't work, esp. luajit
+  # TODO: figure out why some dependencies don't work, esp. lua
   # currently use vendored libs instead
   buildInputs = [
     libpng
     ncurses
     perl
-    sqlite
+    #sqlite is vendored
     zlib
   ] ++ optionals enableTiles [
     SDL2
     SDL2_image
     freetype
     libGLU
-    mesa_noglu
   ] ++ optional enableSound SDL2_mixer;
 
   # crawl expects SDL2_image and SDL2_mixer in the same directory as SDL2, so we
   # need to specify them manually
-  INCLUDES_L = "-I${zlib}/include"
-    + optionalString enableTiles "-I${SDL2}/include -I${SDL2_image}/include"
+  INCLUDES_L = optionalString enableTiles "-I${SDL2}/include -I${SDL2_image}/include"
     + optionalString enableSound " -I${SDL2_mixer}/include";
-  SQLITE_INCLUDE_DIR = "${sqlite}/include";
 
   makeFlags = "prefix=$(out)";
 
