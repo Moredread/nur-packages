@@ -1,11 +1,22 @@
-{ stdenv, libpng, gnumake, pkgconfig, fetchFromGitHub, which, fetchgit, perl, sqlite, freetype, SDL2, SDL2_image, SDL2_mixer, mesa_noglu, ncurses, zlib, pngcrush, libGLU, enableTiles ? false, enableSound ? enableTiles }:
+{ stdenv, gnumake, pkgconfig, fetchFromGitHub, which, perl, sqlite, ncurses, zlib
+, enableTiles ? false, pngcrush ? null, libGLU ? null, libpng ? null, freetype ? null, SDL2 ? null, SDL2_image ? null, mesa_noglu ? null
+, enableSound ? enableTiles, SDL2_mixer ? null }:
 
 # TODO: needs some cleaning. Bones file is downloaded during install, so is
-# missing if build in a sandbox. Needs deepClone atm as version string is
-# generated from git commit (might be generated manually).
+# missing if build in a sandbox.
+
+assert enableSound -> enableTiles == true;
+assert enableSound -> SDL2_mixer != null;
+
+assert enableTiles -> SDL2 != null;
+assert enableTiles -> SDL2_image != null;
+assert enableTiles -> freetype != null;
+assert enableTiles -> libGLU != null;
+assert enableTiles -> libpng != null;
+assert enableTiles -> mesa_noglu != null;
+assert enableTiles -> pngcrush != null;
 
 with stdenv.lib;
-
 stdenv.mkDerivation rec {
   name = "crawl" + optionalString enableTiles "-tiles";
   version = "0.22.1";
