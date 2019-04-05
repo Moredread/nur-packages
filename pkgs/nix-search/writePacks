@@ -2,7 +2,7 @@
 
 OUTFILE=${1:-/dev/stdout}
 
-nix-env -qa -P | awk '{print $1}' | grep 'nixos\.' > $OUTFILE
+nix-env -f '<nixpkgs>' -qaP | awk '{print "nixpkgs."$1}' > $OUTFILE
 nix-env -f '<nixpkgs>' -qaP -A haskellPackages | \
-    awk '{print "nixos."$1}' >> $OUTFILE
+    awk '{print "nixpkgs."$1}' >> $OUTFILE
 #vim: ft=sh
