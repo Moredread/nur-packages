@@ -14,7 +14,6 @@ rec {
   modules = import ./modules; # NixOS modules
   overlays = import ./overlays; # nixpkgs overlays
 
-  croc = pkgs.callPackage ./pkgs/croc { };
   i3status-rust = pkgs.callPackage ./pkgs/i3status-rust { };
   implicitcad = pkgs.haskellPackages.callPackage ./pkgs/implicitcad { };
   nix-search = pkgs.callPackage ./pkgs/nix-search { };
