@@ -17,7 +17,6 @@ rec {
   croc = pkgs.callPackage ./pkgs/croc { };
   i3status-rust = pkgs.callPackage ./pkgs/i3status-rust { };
   implicitcad = pkgs.haskellPackages.callPackage ./pkgs/implicitcad { };
-  latte = pkgs.callPackage ./pkgs/latte { };
   nix-search = pkgs.callPackage ./pkgs/nix-search { };
   throttled = pkgs.callPackage ./pkgs/throttled { };
   lenovo-throttling-fix = throttled;
