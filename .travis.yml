@@ -22,7 +22,6 @@ install:
 - nix-channel --list
 - nix-channel --add "${NIX_CHANNEL}" nixpkgs
 - travis_retry nix-channel --update
-- if [ -n "${CACHIX_CACHE}" ]; then travis_retry nix-channel --update; fi
 - if [ -n "${CACHIX_CACHE}" ]; then nix-env -i cachix; fi
 - if [ -n "${CACHIX_CACHE}" ]; then cachix use "${CACHIX_CACHE}"; fi
 script:
