@@ -14,20 +14,18 @@ rec {
   modules = import ./modules; # NixOS modules
   overlays = import ./overlays; # nixpkgs overlays
 
-  airnef = pkgs.callPackage ./pkgs/airnef {
-    pythonPackages =
-      pkgs.python3Packages;
-    buildPythonApplication =
-      pkgs.python3Packages.buildPythonApplication;
+  experimental = {
+    airnef = pkgs.callPackage ./pkgs/airnef {
+      pythonPackages = pkgs.python3Packages;
+      buildPythonApplication = pkgs.python3Packages.buildPythonApplication;
+    };
   };
 
-  nmigen = pkgs.callPackage ./pkgs/nmigen {};
-  nmigen-boards = pkgs.callPackage ./pkgs/nmigen-boards { nmigen = nmigen; };
-
   cc-tool = pkgs.callPackage ./pkgs/cc-tool {};
-  ipbt = pkgs.callPackage ./pkgs/ipbt {};
+  cereal = pkgs.callPackage ./pkgs/cereal {};
   implicitcad = pkgs.haskellPackages.callPackage ./pkgs/implicitcad {};
+  ipbt = pkgs.callPackage ./pkgs/ipbt {};
   nix-search = pkgs.callPackage ./pkgs/nix-search {};
-  prusa-slicer-latest = pkgs.callPackage ./pkgs/prusa-slicer-latest { cereal = pkgs.callPackage ./pkgs/cereal {}; };
+  prusa-slicer-latest = pkgs.callPackage ./pkgs/prusa-slicer-latest { inherit cereal; };
   slic3r-prusa3d-latest = prusa-slicer-latest;
 }
