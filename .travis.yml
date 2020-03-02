@@ -1,5 +1,5 @@
 language: nix
-nix: 2.3
+nix: 2.3.3
 sudo: false
 env:
   global:
