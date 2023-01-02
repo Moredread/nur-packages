@@ -35,8 +35,5 @@ rec {
     cgal_5 = pkgs.callPackage ./pkgs/prusa-slicer-latest/cgal_5.nix {};
   };
 
-  joplin-desktop = ( pkgs.callPackage ./pkgs/joplin-desktop {} ).overrideAttrs( _: {
-      preferLocalBuild = true;
-    }
-  );
+  joplin-desktop = pkgs.callPackage ./pkgs/joplin-desktop { };
 }
