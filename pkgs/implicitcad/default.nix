@@ -104,7 +104,6 @@ mkDerivation rec {
     linear
     show-combinators
   ];
-  preferLocalBuild = true;
   testHaskellDepends = [ base containers hspec mtl parsec ];
   benchmarkHaskellDepends = [ base criterion parsec random ];
   homepage = "http://kalli1.faikvm.com/ImplicitCAD/Stable";
