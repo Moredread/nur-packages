@@ -1,8 +1,6 @@
 { appimageTools, fetchurl, lib, gsettings-desktop-schemas, gtk3, makeDesktopItem }:
 
 let
-  pname = "joplin-desktop";
-  version = "3.3.5";
   desktopItem = makeDesktopItem {
      name = "Joplin";
      exec = "joplin-desktop";
@@ -10,7 +8,8 @@ let
      desktopName = "Joplin";
   };
 in appimageTools.wrapType2 rec {
-  name = "${pname}-${version}";
+  pname = "joplin-desktop";
+  version = "3.3.5";
 
   src = fetchurl {
     url = "https://github.com/laurent22/joplin/releases/download/v${version}/Joplin-${version}.AppImage";
@@ -27,7 +26,6 @@ in appimageTools.wrapType2 rec {
   extraInstallCommands = ''
     mkdir -p $out/share/applications
     ln -s ${desktopItem}/share/applications/* $out/share/applications
-    mv $out/bin/{${name},${pname}}
   '';
 
 
