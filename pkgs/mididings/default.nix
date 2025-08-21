@@ -1,6 +1,6 @@
 { lib, python, fetchFromGitHub, boost, alsa-lib, jack2, pkg-config, meson, ninja, tkinter, scdoc }:
 
-python.pkgs.buildPythonApplication rec {
+python.pkgs.buildPythonPackage rec {
   pname = "mididings";
   version = "unstable-20250818";
   pyproject = true;
