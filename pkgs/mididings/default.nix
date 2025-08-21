@@ -1,4 +1,4 @@
-{ lib, python, fetchFromGitHub, boost, alsa-lib, jack2, pkg-config, meson, ninja, tkinter }:
+{ lib, python, fetchFromGitHub, boost, alsa-lib, jack2, pkg-config, meson, ninja, tkinter, scdoc }:
 
 python.pkgs.buildPythonApplication rec {
   pname = "mididings";
@@ -16,6 +16,7 @@ python.pkgs.buildPythonApplication rec {
     meson
     ninja
     pkg-config
+    scdoc
   ] ++ (with python.pkgs; [
     meson-python
     setuptools
@@ -37,14 +38,24 @@ python.pkgs.buildPythonApplication rec {
     pyliblo3
     dbus-python
     pyxdg
-    inotify-simple  # Alternative to pyinotify
+    inotify-simple # Alternative to pyinotify
   ]);
 
   # Note: pysmf is not available in nixpkgs, so MIDI file functionality won't work
   # inotify-simple is used instead of pyinotify (same functionality)
 
+
   # Skip tests as they may require MIDI hardware
   doCheck = false;
+
+
+  # Build man pages manually (meson-python can't include them in wheels)
+  postFixup = ''
+    mkdir -p $out/share/man/man1
+    for page in mididings livedings send_midi; do
+      ${scdoc}/bin/scdoc < $src/doc/man/$page.scd > $out/share/man/man1/$page.1
+    done
+  '';
 
   # Skip runtime deps check as it's overly strict about boost
   dontCheckRuntimeDeps = true;
