@@ -63,7 +63,7 @@ python.pkgs.buildPythonApplication rec {
   meta = with lib; {
     description = "A MIDI router and processor based on Python, supporting ALSA and JACK MIDI";
     homepage = "https://github.com/mididings/mididings";
-    license = licenses.gpl2Only;
+    license = licenses.gpl2Plus;
     maintainers = with maintainers; [ ];
     platforms = platforms.linux;
   };
