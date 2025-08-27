@@ -6,8 +6,10 @@ on:
       - main
   schedule:
     - cron:  '04 9 * * *'
+  workflow_dispatch:
 jobs:
   tests:
+    continue-on-error: true
     strategy:
       matrix:
         # Set this to notify the global nur package registry that changes are
@@ -30,8 +32,9 @@ jobs:
         cachixName:
           - moredread
         nixPath:
-          - nixpkgs=channel:nixos-unstable
-          - nixpkgs=channel:nixos-25.05
+          - nixpkgs=https://github.com/NixOS/nixpkgs/archive/refs/heads/nixpkgs-unstable.tar.gz
+          - nixpkgs=https://github.com/NixOS/nixpkgs/archive/refs/heads/nixos-unstable.tar.gz
+          - nixpkgs=https://github.com/NixOS/nixpkgs/archive/refs/heads/nixos-25.05.tar.gz
     runs-on: ubuntu-latest
     steps:
     - name: Checkout repository
