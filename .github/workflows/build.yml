@@ -4,12 +4,8 @@ on:
   push:
     branches:
       - main
-      - master
   schedule:
-    # rebuild everyday at 2:51
-    # TIP: Choose a random time here so not all repositories are build at once:
-    # https://www.random.org/clock-times/?num=1&earliest=01%3A00&latest=08%3A00&interval=5&format=html&rnd=new
-    - cron:  '51 2 * * *'
+    - cron:  '04 9 * * *'
 jobs:
   tests:
     strategy:
@@ -35,11 +31,11 @@ jobs:
           - moredread
         nixPath:
           - nixpkgs=channel:nixos-unstable
-          - nixpkgs=channel:nixos-24.11
+          - nixpkgs=channel:nixos-25.05
     runs-on: ubuntu-latest
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v4
+      uses: actions/checkout@v5
     - name: Install nix
       uses: cachix/install-nix-action@v25
       with:
