@@ -22,10 +22,11 @@ There are no tests; "building cleanly" is the check. CI (`.github/workflows/buil
 
 ## Structure
 
-- `default.nix` is the single source of truth: takes `pkgs` (must not import `<nixpkgs>` itself beyond the default arg) and returns the package attrset plus the reserved names `lib`, `modules`, `overlays`. Add a new package by creating `pkgs/<name>/default.nix` and wiring it here with the appropriate `callPackage` (`pkgs.callPackage`, `pkgs.python3Packages.callPackage`, `pkgs.haskellPackages.callPackage` for `implicitcad`, which is a cabal2nix-style expression).
-- `flake.nix` wraps `default.nix`: `legacyPackages` = the full attrset (incl. `lib`/`modules`/`overlays`), `packages` = only the derivations filtered out of it.
+- `default.nix` is the single source of truth: takes `pkgs` (must not import `<nixpkgs>` itself beyond the default arg) and returns the package attrset plus the reserved names `lib`, `overlays`, `nixosModules` (and, per the template, `homeModules`/`darwinModules`/`flakeModules`). Add a new package by creating `pkgs/<name>/default.nix` and wiring it here with the appropriate `callPackage` (`pkgs.callPackage`, `pkgs.python3Packages.callPackage`, `pkgs.haskellPackages.callPackage` for `implicitcad`, which is a cabal2nix-style expression).
+- `flake.nix` wraps `default.nix`: `legacyPackages` = the full attrset (incl. `lib`/`overlays`/`nixosModules`), `packages` = only the derivations filtered out of it, `nixosModules` = `nixos-modules/`.
 - `ci.nix` and `overlay.nix` both re-import `default.nix` and skip the reserved names; `ci.nix` additionally drops packages with `meta.broken`, non-free licenses, or `preferLocalBuild`, so set those meta fields to control what CI builds/caches.
-- `lib/`, `modules/` (NixOS modules) and `overlays/` are empty template placeholders.
+- `lib/`, `nixos-modules/` and `overlays/` are empty template placeholders.
+- Upstream template: `nix-community/nur-packages-template`; last synced at its `b885a76` (2026-06-12). Exception: `.github/workflows/build.yml` is a local flake-based rewrite (nix-fast-build, `--override-input` matrix), not the template's `nixPath`/`ci.nix` workflow.
 
 ## Conventions
 
