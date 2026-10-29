@@ -16,7 +16,7 @@ jobs:
           - name: locked
             override: ""
           - name: stable
-            override: "--override-input nixpkgs github:NixOS/nixpkgs/nixos-25.11"
+            override: "--override-input nixpkgs github:NixOS/nixpkgs/nixos-26.05"
           - name: unstable
             override: "--override-input nixpkgs github:NixOS/nixpkgs/nixos-unstable"
     runs-on: ubuntu-latest

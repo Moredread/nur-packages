@@ -9,7 +9,7 @@ Personal [NUR](https://github.com/nix-community/NUR) repository (NUR name `mored
 New files must be `git add`ed before flake commands can see them.
 
 ```sh
-nix build .#<pkg>                       # build one package via the flake (locked nixpkgs, nixos-25.11)
+nix build .#<pkg>                       # build one package via the flake (locked nixpkgs, nixos-26.05)
 nix-build -A <pkg>                      # same via default.nix and <nixpkgs> from NIX_PATH
 nix build .#<pkg> --override-input nixpkgs github:NixOS/nixpkgs/nixos-unstable   # test against unstable
 nix flake show                          # list exposed packages
@@ -18,7 +18,7 @@ nix flake update                        # bump flake.lock
 scripts/joplin-version.sh               # latest Joplin AppImage URL + prefetch hash
 ```
 
-There are no tests; "building cleanly" is the check. CI (`.github/workflows/build.yml`) builds the package set against the locked input plus nixos-25.11 and nixos-unstable, pushes to Cachix, and on `main` pings the NUR update endpoint.
+There are no tests; "building cleanly" is the check. CI (`.github/workflows/build.yml`) builds the package set against the locked input plus nixos-26.05 and nixos-unstable, pushes to Cachix, and on `main` pings the NUR update endpoint.
 
 ## Structure
 
