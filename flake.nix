@@ -1,6 +1,6 @@
 {
   description = "Moredread's NUR repo";
-  inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
+  inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.11";
   outputs = { self, nixpkgs }:
     let
       forAllSystems = nixpkgs.lib.genAttrs nixpkgs.lib.systems.flakeExposed;
